@@ -1,14 +1,19 @@
 package transacciones;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.HashMap;
 
-import galeria.inventario.ObraDeArte;
-import galeria.usuarios.Cliente;
-import galeria.usuarios.Usuario;
+import inventario.ObraDeArte;
+import usuarios.Cliente;
+import usuarios.Usuario;
 
-public abstract class Transaccion 
+public abstract class Transaccion implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//atributos
 	private Date fechaSolicitud;
 	private Date fechaAprobacion;
@@ -96,7 +101,7 @@ public abstract class Transaccion
 
 		Cliente cliente = Clientes1.get(idCliente);
 		int idRegistro = Integer.parseInt(codigoRegistro);
-		HashMap<Integer, ObraDeArte> mapa = cliente.getHistorialPropiedad();
+		HashMap<Integer, ObraDeArte> mapa = cliente.consultarHistorialPropiedad();
 		mapa.put(idRegistro,pieza);
 		cliente.setHistorialPropiedad(mapa);
 		
@@ -106,7 +111,7 @@ public abstract class Transaccion
 	{
 		Cliente cliente = Clientes1.get(idCliente);
 		int idRegistro = Integer.parseInt(codigoRegistro);
-		HashMap<Integer, ObraDeArte> mapa = cliente.getHistorialCompra();
+		HashMap<Integer, ObraDeArte> mapa = cliente.consultarHistorialCompra();
 		mapa.put(idRegistro,pieza);
 		cliente.setHistorialPropiedad(mapa);
 	}
@@ -115,14 +120,14 @@ public abstract class Transaccion
 	{
 		Cliente cliente = Clientes1.get(idCliente);
 		int idRegistro = Integer.parseInt(codigoRegistro);
-		HashMap<Integer, ObraDeArte> mapa = cliente.getHistorialCompra();
+		HashMap<Integer, ObraDeArte> mapa = cliente.consultarHistorialPropiedad();
 		mapa.remove(idRegistro,pieza);
 		cliente.setHistorialPropiedad(mapa);
 	}
 	
 	public void actualizarPropietario(ObraDeArte pieza, int identificacion)
 	{
-		pieza.setpropietarioActual(identificacion);
+		pieza.setPropietarioActual(identificacion);
 	}
 	
 	public void cambiarEstadoPieza(ObraDeArte pieza)
@@ -142,9 +147,5 @@ public abstract class Transaccion
 	public boolean verificarComprador() {
 		return true;
 	}
-	
-	public void identificarPropietarios () {
-		//TODO No entiendo para que
-		return;
-	}
+
 }

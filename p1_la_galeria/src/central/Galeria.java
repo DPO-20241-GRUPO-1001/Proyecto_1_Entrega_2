@@ -1,12 +1,13 @@
 package central;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.HashMap;
 
-import galeria.transacciones.Compra;
-import galeria.transacciones.Subasta;
+import transacciones.Compra;
+import transacciones.Subasta;
 import inventario.Ceramica;
 import inventario.Escultura;
 import inventario.Fotografia;
@@ -15,12 +16,17 @@ import inventario.ObraDeArte;
 import inventario.Pintura;
 import inventario.Video;
 import transacciones.Pago;
+import inventario.ObraDeArte;
 import usuarios.Cliente;
 import usuarios.Empleado;
 import usuarios.Usuario;
 
-public class Galeria 
+public class Galeria implements Serializable
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//atributos
 	private HashMap<Integer, ObraDeArte> piezas;
 	private ArrayList<Empleado> empleados;
@@ -301,7 +307,7 @@ public class Galeria
 
 		for (String codigo : codigos) {
 
-			ObraDeArte pieza = obras.get(codigo);
+			ObraDeArte pieza = piezas.get(codigo);
 
 			Compra compra = new Compra(fecha,fecha,identificacion);
 			
@@ -318,7 +324,7 @@ public class Galeria
 					compra.cambiarEstadoPieza(pieza);
 					compra.eliminarPiezaMapaPropiedad(identificacion,codigosRegistro,pieza);
 					Pago pago = new Pago(tipoPago,pieza.getValor(),identificacion,Integer.parseInt(codigo));
-					Empleado.registrar_pago(pagos, pago);
+					// TODO Empleado.registrar_pago(pagos, pago);
 					ans = "La compra se realizó exitosamente";
 
 				}else {
@@ -341,14 +347,14 @@ public class Galeria
 		String[] codigos = codigosRegistro.split(", ");
 		String tipoSolicitud = "Subasta";
 		for (String codigo : codigos) {
-			ObraDeArte pieza = obras.get(codigo);
+			ObraDeArte pieza = piezas.get(codigo);
 			Subasta subasta = new Subasta(fecha,fecha,identificacion);
 			if (subasta.verificarEstadoPieza(tipoSolicitud)) {
 				if (subasta.verificarComprador()) {
 					//TODO funcion verificarComprador	
-					if (verificarOferta(subasta, oferta))  {
+					if (subasta.verificarOferta(subasta, oferta))  {
 						Pago pago = new Pago(tipoPago,pieza.getValor(),identificacion,Integer.parseInt(codigo));
-						Empleado.registrar_pago(pagos, pago);
+						// TODO Empleado.registrar_pago(pagos, pago);
 						subasta.actualizarPropietario(pieza,identificacion);
 						subasta.agregarPiezaMapaPropiedades(identificacion,codigosRegistro,pieza);
 						subasta.agregarPiezaMapaCompras(identificacion,codigosRegistro,pieza);

@@ -3,11 +3,15 @@ package transacciones;
 import java.util.Date;
 import java.util.HashMap;
 
-import galeria.inventario.ObraDeArte;
-import galeria.usuarios.Usuario;
+import inventario.ObraDeArte;
+import usuarios.Usuario;
 
 public class Compra extends Transaccion
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//heredados
 	private Date fechaSolicitud;
 	private Date fechaAprobacion;
@@ -73,11 +77,8 @@ public class Compra extends Transaccion
 		// TODO Auto-generated method stub
 		return super.getSolicitudSubasta();
 	}
-	
-	
-	//Métodos específicos
-	
-	public boolean verificarCompra()
+    
+    public boolean verificarCompra()
 	{
 		// TODO terminar
 		return true;
@@ -88,5 +89,4 @@ public class Compra extends Transaccion
 		// TODO terminar
 		return true;
 	}
-
 }

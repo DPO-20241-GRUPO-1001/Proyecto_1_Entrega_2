@@ -1,15 +1,17 @@
 package transacciones;
 
-package galeria.transacciones;
-
 import java.util.Date;
 import java.util.HashMap;
 
-import galeria.inventario.ObraDeArte;
-import galeria.usuarios.Usuario;
+import inventario.ObraDeArte;
+import usuarios.Usuario;
 
 public class Subasta extends Transaccion 
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//heredados
 	private Date fechaSolicitud;
 	private Date fechaAprobacion;

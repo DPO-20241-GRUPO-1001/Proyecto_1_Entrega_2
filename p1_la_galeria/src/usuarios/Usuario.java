@@ -1,8 +1,14 @@
 package usuarios;
 
-public abstract class Usuario 
+import java.io.Serializable;
+
+public abstract class Usuario implements Serializable
 {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//atributos
 	private String nombre;
 	private int identificacion; // identificador único
@@ -29,7 +35,7 @@ public abstract class Usuario
 	public String getNombre() {
 		return nombre;
 	}
-
+    
 	public int getIdentificacion() {
 		return identificacion;
 	}
@@ -65,8 +71,6 @@ public abstract class Usuario
 		}
 		
 	}
-
-	
 
 }
 

@@ -6,6 +6,10 @@ import inventario.ObraDeArte;
 
 public class Cliente extends Usuario
 {
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	//heredados 
 	private String nombre;
 	private int identificacion; // identificador único
@@ -100,10 +104,14 @@ public class Cliente extends Usuario
 		// TODO Auto-generated method stub
 		super.setNewPassword(oldPassword, newPassword);
 	}
+    public void setHistorialPropiedad(HashMap<Integer, ObraDeArte> historialPropiedad) {
+		this.historialPropiedad = historialPropiedad;
+	}
 
-	
 
-	
-	
+	public void setHistorialCompra(HashMap<Integer, ObraDeArte> historialCompra) {
+		this.historialCompra = historialCompra;
+	}
+
 }
 
